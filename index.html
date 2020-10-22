@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Naughts and Crosses</title>
+    <meta charset="UTF-8" />
+    <script src="src/index.js"></script>
+    <link rel="stylesheet" href="sb-admin-2.min.css">
+    
+  </head>
+  <body>
+    <h1>Welcome to Naughts and Crosses! </h1>
+    <img id="griddy" src="image.png" alt="">
+    <form action="#">
+      <label for="row">Enter row:    </label>
+      <input type="text" id="rownum" name="row" /><br /><br />
+      <label for="col">Enter col:    </label>
+      <input type="text" id="colnum" name="col" /><br /><br />
+    </form>
+    <button id="here" onclick="myFunction(), setTimeout(AiFunction, 1000)"> Submit </button>
+    <button id="here" onclick="showFunction()">Instructions</button>
+    <button id="here" onclick="clearBoard()">Clear Board</button>
+    <div class="turninfo" >
+    <p id="rowshow"></p>
+    <p id="colshow"></p>
+   </div>
+    <br />
+
+    <div id="demo"></div>
+    <div id="instructions">
+      Instructions: Please enter the numeral value for row and column as shown in the image below.
+    </div>
+    <script>
+      var board;
+      board = [
+        ["-", "-", "-"],
+        ["-", "-", "-"],
+        ["-", "-", "-"]
+      ];
+    function clearBoard() {
+      board = [
+        ["-", "-", "-"],
+        ["-", "-", "-"],
+        ["-", "-", "-"]
+      ];
+      document.getElementById("demo").innerHTML = board.join("<br>");
+} 
+      //Your turn
+      function myFunction() {
+        var row = document.getElementById("rownum").value;
+        var col = document.getElementById("colnum").value;
+
+        if (board[row][col] == "O") {
+          alert("Space is not empty!");
+        } else {
+          document.getElementById("rowshow").innerHTML = "Row Num: " + row;
+          document.getElementById("colshow").innerHTML = "Col Num: " + col;
+          board[row][col] = "X";
+          document.getElementById("demo").innerHTML = board.join("<br>");
+        }
+        //horizontal wins
+        if (board[0][0] == "X" && board[0][1] == "X" && board[0][2] == "X" ) {
+        alert("X WINS!");
+        clearBoard();
+        }
+        if (board[1][0] == "X" && board[1][1] == "X" && board[1][2] == "X" ) {
+        alert("X WINS!");
+        clearBoard();
+        }
+        if (board[2][0] == "X" && board[2][1] == "X" && board[2][2] == "X" ) {
+        alert("X WINS!");
+        clearBoard();
+        }
+        //vertical wins
+        if (board[0][0] == "X" && board[1][0] == "X" && board[2][0] == "X" ) {
+        alert("X WINS!");
+        clearBoard();
+        }
+        if (board[0][1] == "X" && board[1][1] == "X" && board[2][1] == "X" ) {
+        alert("X WINS!");
+        clearBoard();
+        }
+        if (board[0][2] == "X" && board[1][2] == "X" && board[2][2] == "X" ) {
+        alert("X WINS!");
+        clearBoard();
+        }
+        //diagonal wins
+        if (board[0][0] == "X" && board[1][1] == "X" && board[2][2] == "X" ) {
+        alert("X WINS!");
+        clearBoard();
+        }
+        if (board[2][0] == "X" && board[1][1] == "X" && board[0][2] == "X" ) {
+        alert("X WINS!");
+        clearBoard();
+        }
+        if (board[0][0] != "-" && board[0][1] != "-" && board[0][2] != "-" && board[1][0] != "-" && board[1][1] != "-" && board[1][2] != "-" && 
+        board[2][0] != "-" && board[2][1] != "-" && board[2][2] != "-") {
+          alert("DRAW!");
+          clearBoard();
+        }
+      }
+      //AI turn
+      function AiFunction() {
+        row = Math.floor(Math.random() * 3);
+        col = Math.floor(Math.random() * 3);
+        while (board[row][col] == "X" || board[row][col] == "O") {
+          row = Math.floor(Math.random() * 3);
+          col = Math.floor(Math.random() * 3);
+        }
+        document.getElementById("rowshow").innerHTML = "AI Row Num: " + row;
+        document.getElementById("colshow").innerHTML = "AI Col Num: " + col;
+        board[row][col] = "O";
+        document.getElementById("demo").innerHTML = board.join("<br>");
+ //horizontal wins
+        if (board[0][0] == "X" && board[0][1] == "X" && board[0][2] == "X" ) {
+         alert("O WINS!");
+        clearBoard();
+        }
+        if (board[1][0] == "O" && board[1][1] == "O" && board[1][2] == "O" ) {
+          alert("O WINS!");
+        clearBoard();
+        }
+        if (board[2][0] == "O" && board[2][1] == "O" && board[2][2] == "O" ) {
+          alert("O WINS!");
+        clearBoard();
+        }
+        //vertical wins
+        if (board[0][0] == "O" && board[1][0] == "O" && board[2][0] == "O" ) {
+          alert("O WINS!");
+        clearBoard();
+        }
+        if (board[0][1] == "O" && board[1][1] == "O" && board[2][1] == "O" ) {
+          alert("O WINS!");
+        clearBoard();
+        }
+        if (board[0][2] == "O" && board[1][2] == "O" && board[2][2] == "O" ) {
+          alert("O WINS!");
+        clearBoard();
+        }
+        //diagonal wins
+        if (board[0][0] == "O" && board[1][1] == "O" && board[2][2] == "O" ) {
+        alert("O WINS!");
+        clearBoard();
+        }
+        if (board[2][0] == "O" && board[1][1] == "O" && board[0][2] == "O" ) {
+          alert("O WINS!");
+        clearBoard();
+        }
+        if (board[0][0] != "-" && board[0][1] != "-" && board[0][2] != "-" && board[1][0] != "-" && board[1][1] != "-" && board[1][2] != "-" && 
+        board[2][0] != "-" && board[2][1] != "-" && board[2][2] != "-") {
+          alert("DRAW!");
+          clearBoard();
+        }
+
+      }
+      //Show Instrutions
+      function showFunction() {
+      var x = document.getElementById("instructions");
+      if (x.style.display === "none") {
+      x.style.display = "block";
+      } else {
+      x.style.display = "none";
+      }
+      }
+    </script>
+  </body>
+</html>
